@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Microservice.iml" filepath="$PROJECT_DIR$/.idea/Microservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mlb-service/mlb-service.iml" filepath="$PROJECT_DIR$/mlb-service/mlb-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nba-service/nba-service.iml" filepath="$PROJECT_DIR$/nba-service/nba-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nfl-service/nfl-service.iml" filepath="$PROJECT_DIR$/nfl-service/nfl-service.iml" />
+    </modules>
+  </component>
+</project>

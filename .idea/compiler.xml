@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="mlb-service" />
+        <module name="nba-service" />
+        <module name="nfl-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="mlb-service" target="11" />
+      <module name="nba-service" target="11" />
+      <module name="nfl-service" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="mlb-service" options="-parameters" />
+      <module name="nba-service" options="-parameters" />
+      <module name="nfl-service" options="-parameters" />
+    </option>
+  </component>
+</project>
