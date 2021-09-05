@@ -1,0 +1,24 @@
+server:
+  port: 9006
+
+spring:
+  datasource:
+    url: jdbc:mysql://database-1.ca8sxikpfiwe.us-east-2.rds.amazonaws.com:3306/sports
+    username: admin
+    password: 116AwSHGA1031!
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+  application:
+    name: NFL-TEAM-SERVICE
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:9000/eureka/
+    instance:
+      hostname: localhost
