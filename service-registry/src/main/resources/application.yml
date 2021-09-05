@@ -1,0 +1,8 @@
+server:
+  port: 9000
+
+eureka:
+  client:
+    register-with-false: false
+    fetch-registry: false
+  renewalPercentThreshold: 0.85
