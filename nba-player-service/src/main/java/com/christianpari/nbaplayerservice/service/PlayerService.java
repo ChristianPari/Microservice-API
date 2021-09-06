@@ -78,7 +78,7 @@ public class PlayerService {
     log.info("Inside getPlayerWithTeam of PlayerService");
     ResponseTemplateVO vo = new ResponseTemplateVO();
     Player player = getPlayerById(id);
-    Team team = template.getForObject("http://NBA-TEAM-SERVICE/nba/teams/" + player.getTeam(), Team.class);
+    Team team = template.getForObject("http://NBA-TEAM-SERVICE/teams/" + player.getTeam(), Team.class);
     vo.setPlayer(player);
     vo.setTeam(team);
     return vo;

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/nba/players")
+@RequestMapping("/players")
 @Slf4j
 public class PlayerController {
   @Autowired
