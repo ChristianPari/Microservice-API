@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/teams")
+@RequestMapping("/nba/teams")
 @Slf4j
 public class TeamController {
   @Autowired

@@ -8,7 +8,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseTemplateVO {
+public class PlayerTeamVO {
   private Player player;
   private Team team;
 }

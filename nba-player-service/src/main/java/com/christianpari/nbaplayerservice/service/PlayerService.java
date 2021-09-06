@@ -1,6 +1,7 @@
 package com.christianpari.nbaplayerservice.service;
 
-import com.christianpari.nbaplayerservice.VO.ResponseTemplateVO;
+import com.christianpari.nbaplayerservice.VO.MultiPlayerTeamVO;
+import com.christianpari.nbaplayerservice.VO.PlayerTeamVO;
 import com.christianpari.nbaplayerservice.VO.Team;
 import com.christianpari.nbaplayerservice.entity.Player;
 import com.christianpari.nbaplayerservice.repository.PlayerRepository;
@@ -26,16 +27,20 @@ public class PlayerService {
     log.info("Inside getAllPlayers of PlayerService");
     return repository.findAll();
   }
-  public List<Player> getPlayersByTeam(String abr) {
+  public MultiPlayerTeamVO getPlayersByTeam(String abr) {
+    MultiPlayerTeamVO vo = new MultiPlayerTeamVO();
     List<Player> players = getAllPlayers();
     for (int idx = 0; idx < players.size(); idx++) {
       Player curPlayer = players.get(idx);
-      if (curPlayer.getTeam().equals(abr)) {
+      if (!curPlayer.getTeam().equals(abr)) {
         players.remove(idx--);
       }
     }
     log.info("Inside getPlayersByTeam of PlayerService");
-    return players;
+    Team team = template.getForObject("http://NFL-TEAM-SERVICE/nfl/teams/" + abr, Team.class);
+    vo.setPlayers(players);
+    vo.setTeam(team);
+    return vo;
   }
   public List<Player> getPlayersByPosition(String pos) {
     List<Player> players = getAllPlayers();
@@ -74,11 +79,11 @@ public class PlayerService {
     log.info("Inside getPlayerById of PlayerService");
     return repository.findById(id).isPresent() ? repository.getById(id) : null;
   }
-  public ResponseTemplateVO getPlayerWithTeam(Integer id) {
-    log.info("Inside getPlayerWithTeam of PlayerService");
-    ResponseTemplateVO vo = new ResponseTemplateVO();
+  public PlayerTeamVO getPlayerByIdWithTeam(Integer id) {
+    log.info("Inside getPlayerByIdWithTeam of PlayerService");
+    PlayerTeamVO vo = new PlayerTeamVO();
     Player player = getPlayerById(id);
-    Team team = template.getForObject("http://NBA-TEAM-SERVICE/teams/" + player.getTeam(), Team.class);
+    Team team = template.getForObject("http://NFL-TEAM-SERVICE/nfl/teams/" + player.getTeam(), Team.class);
     vo.setPlayer(player);
     vo.setTeam(team);
     return vo;

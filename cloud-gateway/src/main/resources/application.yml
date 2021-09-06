@@ -10,27 +10,27 @@ spring:
         - id: MLB-PLAYER-SERVICE
           uri: lb://MLB-PLAYER-SERVICE
           predicates:
-            - Path=/players/**
+            - Path=/mlb/players/**
         - id: MLB-TEAM-SERVICE
           uri: lb://MLB-TEAM-SERVICE
           predicates:
-            - Path=/teams/**
+            - Path=/mlb/teams/**
         - id: NBA-PLAYER-SERVICE
           uri: lb://NBA-PLAYER-SERVICE
           predicates:
-            - Path=/players/**
+            - Path=/nba/players/**
         - id: NBA-TEAM-SERVICE
           uri: lb://NBA-TEAM-SERVICE
           predicates:
-            - Path=/teams/**
+            - Path=/nba/teams/**
         - id: NFL-PLAYER-SERVICE
           uri: lb://NFL-PLAYER-SERVICE
           predicates:
-            - Path=/players/**
+            - Path=/nfl/players/**
         - id: NFL-TEAM-SERVICE
           uri: lb://NFL-TEAM-SERVICE
           predicates:
-            - Path=/teams/**
+            - Path=/nfl/teams/**
 
 eureka:
   client:

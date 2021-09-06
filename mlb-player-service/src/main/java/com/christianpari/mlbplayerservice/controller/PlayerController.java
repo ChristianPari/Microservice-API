@@ -1,6 +1,7 @@
 package com.christianpari.mlbplayerservice.controller;
 
-import com.christianpari.mlbplayerservice.VO.ResponseTemplateVO;
+import com.christianpari.mlbplayerservice.VO.MultiPlayerTeamVO;
+import com.christianpari.mlbplayerservice.VO.PlayerTeamVO;
 import com.christianpari.mlbplayerservice.entity.Player;
 import com.christianpari.mlbplayerservice.service.PlayerService;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/players")
+@RequestMapping("/mlb/players")
 @Slf4j
 public class PlayerController {
   @Autowired
@@ -25,9 +26,33 @@ public class PlayerController {
     return service.getAllPlayers();
   }
 
-  @GetMapping("/{id}")
-  public ResponseTemplateVO getPlayerWithTeam(@PathVariable Integer id) {
-    log.info("Inside getPlayerWithTeam of PlayerController");
-    return service.getPlayerWithTeam(id);
+  @GetMapping("/team/{abr}")
+  public MultiPlayerTeamVO getPlayersByTeam(@PathVariable String abr) {
+    log.info("Inside getPlayersByTeam of PlayerController");
+    return service.getPlayersByTeam(abr);
+  }
+
+  @GetMapping("/pos/{pos}")
+  public List<Player> getPlayersByPosition(@PathVariable String pos) {
+    log.info("Inside getPlayersByPosition of PlayerController");
+    return service.getPlayersByPosition(pos);
+  }
+
+  @GetMapping("/jersey/{jersey}")
+  public List<Player> getPlayersByJersey(@PathVariable String jersey) {
+    log.info("Inside getPlayersByJersey of PlayerController");
+    return service.getPlayersByJersey(jersey);
+  }
+
+  @GetMapping("/player/{id}")
+  public Player getPlayerById(@PathVariable Integer id) {
+    log.info("Inside getPlayer of PlayerController");
+    return service.getPlayerById(id);
+  }
+
+  @GetMapping("/player-with-team/{id}")
+  public PlayerTeamVO getPlayerByIdWithTeam(@PathVariable Integer id) {
+    log.info("Inside getPlayerByIdWithTeam of PlayerController");
+    return service.getPlayerByIdWithTeam(id);
   }
 }
