@@ -24,9 +24,21 @@ public class TeamController {
     return service.getAllTeams();
   }
 
-  @GetMapping("/{abr}")
-  public Team getTeamByAbr(@PathVariable String abr) {
-    log.info("Inside getAllTeams of TeamController");
+  @GetMapping("/abr/{abr}")
+  public List<Team> getTeamByAbr(@PathVariable String abr) {
+    log.info("Inside getTeamsByAbr of TeamController");
     return service.getTeamByAbr(abr);
+  }
+
+  @GetMapping("/name/{name}")
+  public List<Team> getTeamsByName(@PathVariable String name) {
+    log.info("Inside getTeamsByName of TeamController");
+    return service.getTeamsByName(name);
+  }
+
+  @GetMapping("/id/{id}")
+  public Team getTeamById(@PathVariable Integer id) {
+    log.info("Inside getTeamById of TeamController");
+    return service.getTeamById(id);
   }
 }

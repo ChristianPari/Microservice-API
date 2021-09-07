@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 @Service
 @Slf4j
@@ -37,7 +36,7 @@ public class PlayerService {
       }
     }
     log.info("Inside getPlayersByTeam of PlayerService");
-    Team team = template.getForObject("http://NFL-TEAM-SERVICE/nfl/teams/" + abr, Team.class);
+    Team team = template.getForObject("http://NFL-TEAM-SERVICE/nfl/teams/abr/" + abr, Team.class);
     vo.setPlayers(players);
     vo.setTeam(team);
     return vo;
@@ -46,7 +45,7 @@ public class PlayerService {
     List<Player> players = getAllPlayers();
     for (int idx = 0; idx < players.size(); idx++) {
       Player curPlayer = players.get(idx);
-      if (!curPlayer.getPosition().equals(pos)) {
+      if (!curPlayer.getPosition().equalsIgnoreCase(pos)) {
         players.remove(idx--);
       }
     }
@@ -68,9 +67,10 @@ public class PlayerService {
     List<Player> players = getAllPlayers();
     for (int idx = 0; idx < players.size(); idx++) {
       Player curPlayer = players.get(idx);
-      if (!Pattern.matches(name, curPlayer.getName())) {
+      String playerName = curPlayer.getName().toLowerCase();
+      name = name.toLowerCase();
+      if (!playerName.contains(name))
         players.remove(idx--);
-      }
     }
     log.info("Inside getPlayersByName of PlayerService");
     return players;
@@ -83,7 +83,7 @@ public class PlayerService {
     log.info("Inside getPlayerByIdWithTeam of PlayerService");
     PlayerTeamVO vo = new PlayerTeamVO();
     Player player = getPlayerById(id);
-    Team team = template.getForObject("http://NFL-TEAM-SERVICE/nfl/teams/" + player.getTeam(), Team.class);
+    Team team = template.getForObject("http://NFL-TEAM-SERVICE/nfl/teams/abr/" + player.getTeam(), Team.class);
     vo.setPlayer(player);
     vo.setTeam(team);
     return vo;

@@ -46,8 +46,14 @@ public class PlayerController {
 
   @GetMapping("/player/{id}")
   public Player getPlayerById(@PathVariable Integer id) {
-    log.info("Inside getPlayer of PlayerController");
+    log.info("Inside getPlayerById of PlayerController");
     return service.getPlayerById(id);
+  }
+
+  @GetMapping("/name/{name}")
+  public List<Player> getPlayersByName(@PathVariable String name) {
+    log.info("Inside getPlayersByName of PlayerController");
+    return service.getPlayersByName(name);
   }
 
   @GetMapping("/player-with-team/{id}")

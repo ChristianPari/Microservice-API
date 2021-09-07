@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 @Service
 @Slf4j
@@ -24,21 +23,24 @@ public class TeamService {
     List<Team> teams = getAllTeams();
     for (int idx = 0; idx < teams.size(); idx++) {
       Team team = teams.get(idx);
-      if (!Pattern.matches(name, team.getTeam_name())) {
+      String teamName = team.getTeam_name().toLowerCase();
+      if (!teamName.contains(name))
         teams.remove(idx--);
-      }
     }
     log.info("Inside getTeamsByName in TeamService");
     return teams;
   }
-  public Team getTeamByAbr(String abr) {
+  public List<Team> getTeamByAbr(String abr) {
     List<Team> teams = getAllTeams();
-    for (Team t : teams) {
-      if (t.getTeam_abr().equals(abr))
-        return t;
+    for (int idx = 0; idx < teams.size(); idx++) {
+      Team team = teams.get(idx);
+      String teamAbr = team.getTeam_abr().toLowerCase();
+      abr = abr.toLowerCase();
+      if (!teamAbr.contains(abr))
+        teams.remove(idx--);
     }
     log.info("Inside getTeamsByAbr in TeamService");
-    return null;
+    return teams;
   }
   public Team getTeamById(Integer id) {
     log.info("Inside getTeamById in TeamService");
