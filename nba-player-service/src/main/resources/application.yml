@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://database-1.ca8sxikpfiwe.us-east-2.rds.amazonaws.com:3306/sports
+    url: jdbc:mysql://database-1.ca8sxikpfiwe.us-east-2.rds.amazonaws.com:3306/nba
     username: admin
     password:
   jpa:

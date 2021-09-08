@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "nfl_player")
+@Table(name = "player")
 @Getter
 @Setter
 @ToString
