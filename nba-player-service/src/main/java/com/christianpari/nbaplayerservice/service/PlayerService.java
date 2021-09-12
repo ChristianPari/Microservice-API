@@ -89,9 +89,9 @@ public class PlayerService {
     log.info("Inside getPlayerByIdWithTeam of PlayerService");
     PlayerTeamVO vo = new PlayerTeamVO();
     Player player = getPlayerById(id);
-    Team team = template.getForObject("http://NBA-TEAM-SERVICE/nba/teams/abr/" + player.getTeam(), Team.class);
+    Team[] team = template.getForObject("http://NBA-TEAM-SERVICE/nba/teams/abr/" + player.getTeam(), Team[].class);
     vo.setPlayer(player);
-    vo.setTeam(team);
+    vo.setTeam(team[0]);
     return vo;
   }
 }
