@@ -19,29 +19,22 @@ public class TeamService {
     log.info("Inside getAllTeams in TeamService");
     return repository.findAll();
   }
+
   public List<Team> getTeamsByName(String name) {
-    List<Team> teams = getAllTeams();
-    for (int idx = 0; idx < teams.size(); idx++) {
-      Team team = teams.get(idx);
-      String teamName = team.getTeam_name().toLowerCase();
-      if (!teamName.contains(name))
-        teams.remove(idx--);
-    }
     log.info("Inside getTeamsByName in TeamService");
-    return teams;
+    return repository.getTeamsByName(name);
   }
-  public List<Team> getTeamByAbr(String abr) {
-    List<Team> teams = getAllTeams();
-    for (int idx = 0; idx < teams.size(); idx++) {
-      Team team = teams.get(idx);
-      String teamAbr = team.getTeam_abr().toLowerCase();
-      abr = abr.toLowerCase();
-      if (!teamAbr.contains(abr))
-        teams.remove(idx--);
-    }
+
+  public Team getTeamByAbr(String abr) {
+    log.info("Inside getTeamByAbr in TeamService");
+    return repository.getTeamByAbr(abr);
+  }
+
+  public List<Team> getTeamsByAbr(String abr) {
     log.info("Inside getTeamsByAbr in TeamService");
-    return teams;
+    return repository.getTeamsByAbr(abr);
   }
+
   public Team getTeamById(Integer id) {
     log.info("Inside getTeamById in TeamService");
     return repository.findById(id).isPresent() ? repository.getById(id) : null;

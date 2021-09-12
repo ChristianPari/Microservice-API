@@ -25,9 +25,15 @@ public class TeamController {
   }
 
   @GetMapping("/abr/{abr}")
-  public List<Team> getTeamByAbr(@PathVariable String abr) {
-    log.info("Inside getTeamsByAbr of TeamController");
+  public Team getTeamByAbr(@PathVariable String abr) {
+    log.info("Inside getTeamByAbr of TeamController");
     return service.getTeamByAbr(abr);
+  }
+
+  @GetMapping("/abr/{abr}")
+  public List<Team> getTeamsByAbr(@PathVariable String abr) {
+    log.info("Inside getTeamsByAbr of TeamController");
+    return service.getTeamsByAbr(abr);
   }
 
   @GetMapping("/name/{name}")

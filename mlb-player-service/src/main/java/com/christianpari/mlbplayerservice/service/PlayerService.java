@@ -29,56 +29,29 @@ public class PlayerService {
   }
 
   public MultiPlayerTeamVO getPlayersByTeam(String abr) {
-    MultiPlayerTeamVO vo = new MultiPlayerTeamVO();
-    List<Player> players = getAllPlayers();
-    for (int idx = 0; idx < players.size(); idx++) {
-      Player curPlayer = players.get(idx);
-      if (!curPlayer.getTeam().equals(abr)) {
-        players.remove(idx--);
-      }
-    }
     log.info("Inside getPlayersByTeam of PlayerService");
-    Team team = template.getForObject("http://MLB-TEAM-SERVICE/mlb/teams/abr/" + abr, Team.class);
+    MultiPlayerTeamVO vo = new MultiPlayerTeamVO();
+    List<Player> players = repository.getPlayersByTeam(abr);
+    String teamAbr = players.get(0).getTeam();
+    Team team = template.getForObject("http://MLB-TEAM-SERVICE/mlb/teams/abr/" + teamAbr, Team.class);
     vo.setPlayers(players);
     vo.setTeam(team);
     return vo;
   }
 
   public List<Player> getPlayersByPosition(String pos) {
-    List<Player> players = getAllPlayers();
-    for (int idx = 0; idx < players.size(); idx++) {
-      Player curPlayer = players.get(idx);
-      if (!curPlayer.getPosition().equalsIgnoreCase(pos)) {
-        players.remove(idx--);
-      }
-    }
     log.info("Inside getPlayersByPosition of PlayerService");
-    return players;
+    return repository.getPlayersByPosition(pos);
   }
 
   public List<Player> getPlayersByJersey(String jersey) {
-    List<Player> players = getAllPlayers();
-    for (int idx = 0; idx < players.size(); idx++) {
-      Player curPlayer = players.get(idx);
-      if (!curPlayer.getJersey_number().equals(jersey)) {
-        players.remove(idx--);
-      }
-    }
     log.info("Inside getPlayersByJersey of PlayerService");
-    return players;
+    return repository.getPlayersByJersey(jersey);
   }
 
   public List<Player> getPlayersByName(String name) {
-    List<Player> players = getAllPlayers();
-    for (int idx = 0; idx < players.size(); idx++) {
-      Player curPlayer = players.get(idx);
-      String playerName = curPlayer.getName().toLowerCase();
-      name = name.toLowerCase();
-      if (!playerName.contains(name))
-        players.remove(idx--);
-    }
     log.info("Inside getPlayersByName of PlayerService");
-    return players;
+    return repository.getPlayersByName(name);
   }
 
   public Player getPlayerById(Integer id) {
@@ -90,9 +63,10 @@ public class PlayerService {
     log.info("Inside getPlayerByIdWithTeam of PlayerService");
     PlayerTeamVO vo = new PlayerTeamVO();
     Player player = getPlayerById(id);
-    Team[] team = template.getForObject("http://MLB-TEAM-SERVICE/mlb/teams/abr/" + player.getTeam(), Team[].class);
+    String teamAbr = player.getTeam();
+    Team team = template.getForObject("http://MLB-TEAM-SERVICE/mlb/teams/abr/" + teamAbr, Team.class);
     vo.setPlayer(player);
-    vo.setTeam(team[0]);
+    vo.setTeam(team);
     return vo;
   }
 }
