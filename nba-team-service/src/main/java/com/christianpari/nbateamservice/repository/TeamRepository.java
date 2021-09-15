@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface TeamRepository extends JpaRepository<Team, Integer> {
-  @Query(value = "FROM #{#entityName} WHERE name LIKE %:name")
+  @Query(value = "FROM #{#entityName} WHERE team_name LIKE %:name")
   List<Team> getTeamsByName(@Param("name") String name);
 
   @Query(value = "FROM #{#entityName} WHERE team_abr = :abr")

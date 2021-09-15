@@ -22,7 +22,7 @@ public class TeamController {
     return service.getAllTeams();
   }
 
-  @GetMapping("/abr/{abr}")
+  @GetMapping("/team/abr/{abr}")
   public Team getTeamByAbr(@PathVariable String abr) {
     log.info("Inside getTeamByAbr of TeamController");
     return service.getTeamByAbr(abr);
