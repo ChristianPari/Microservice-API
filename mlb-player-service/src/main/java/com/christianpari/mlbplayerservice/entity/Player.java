@@ -1,5 +1,6 @@
 package com.christianpari.mlbplayerservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer"})
 public class Player {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
