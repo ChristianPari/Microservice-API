@@ -47,4 +47,22 @@ public class TeamController {
     log.info("Inside getTeamById of TeamController");
     return service.getTeamById(id);
   }
+
+  @GetMapping("/conference/{con}")
+  public List<Team> getTeamsByConference(@PathVariable String con) {
+    log.info("Inside getTeamsByConference of TeamController");
+    return service.getTeamsByConference(con);
+  }
+
+  @GetMapping("/division/{div}")
+  public List<Team> getTeamsByDivision(@PathVariable String div) {
+    log.info("Inside getTeamsByDivision of TeamController");
+    return service.getTeamsByDivision(div);
+  }
+
+  @GetMapping("/conference/{con}/division/{div}")
+  public List<Team> getTeamsByConAndDiv(@PathVariable("con") String con, @PathVariable("div") String div) {
+    log.info("Inside getTeamsByConAndDiv of TeamController");
+    return service.getTeamsByConAndDiv(con, div);
+  }
 }

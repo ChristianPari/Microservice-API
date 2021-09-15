@@ -39,4 +39,19 @@ public class TeamService {
     log.info("Inside getTeamById in TeamService");
     return repository.findById(id).isPresent() ? repository.getById(id) : null;
   }
+
+  public List<Team> getTeamsByConference(String con) {
+    log.info("Inside getTeamsByConference in TeamService");
+    return repository.getTeamsByConference(con);
+  }
+
+  public List<Team> getTeamsByDivision(String div) {
+    log.info("Inside getTeamsByDivision in TeamService");
+    return repository.getTeamsByDivision(div);
+  }
+
+  public List<Team> getTeamsByConAndDiv(String con, String div) {
+    log.info("Inside getTeamsByConAndDiv in TeamService");
+    return repository.getTeamsByConAndDiv(con, div);
+  }
 }
