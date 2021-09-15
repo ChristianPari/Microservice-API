@@ -6,12 +6,10 @@ import com.christianpari.nflplayerservice.entity.Player;
 import com.christianpari.nflplayerservice.service.PlayerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/nfl/players")
@@ -20,6 +18,7 @@ public class PlayerController {
   @Autowired
   private PlayerService service;
 
+  // GET
   @GetMapping("/all")
   public List<Player> getAllPlayers() {
     log.info("Inside getAllPlayers of PlayerController");
@@ -60,5 +59,26 @@ public class PlayerController {
   public PlayerTeamVO getPlayerByIdWithTeam(@PathVariable Integer id) {
     log.info("Inside getPlayerByIdWithTeam of PlayerController");
     return service.getPlayerByIdWithTeam(id);
+  }
+
+  // POST
+  @PostMapping("/newPlayer")
+  public Player addNewPlayer(@RequestBody Player p) {
+    log.info("Inside addNewPlayer of PlayerController");
+    return service.addNewPlayer(p);
+  }
+
+  // PATCH
+  @PatchMapping("/updatePlayer")
+  public Player updatePlayer(@RequestBody Map<String, String> data) {
+    log.info("Inside updatePlayer of PlayerController");
+    return service.updatePlayer(data);
+  }
+
+  // DELETE
+  @DeleteMapping("/deletePlayer/{id}")
+  public Player deletePlayer(@PathVariable Integer id) {
+    log.info("Inside deletePlayer of PlayerController");
+    return service.deletePlayer(id);
   }
 }

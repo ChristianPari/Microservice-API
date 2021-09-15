@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -32,7 +33,7 @@ public class PlayerService {
     MultiPlayerTeamVO vo = new MultiPlayerTeamVO();
     List<Player> players = repository.getPlayersByTeam(abr);
     String teamAbr = players.get(0).getTeam();
-    Team team = template.getForObject("http://NFL-TEAM-SERVICE/nfl/teams/abr/" + teamAbr, Team.class);
+    Team team = template.getForObject("http://NFL-TEAM-SERVICE/nfl/teams/team/abr/" + teamAbr, Team.class);
     vo.setPlayers(players);
     vo.setTeam(team);
     return vo;
@@ -63,9 +64,50 @@ public class PlayerService {
     PlayerTeamVO vo = new PlayerTeamVO();
     Player player = getPlayerById(id);
     String teamAbr = player.getTeam();
-    Team team = template.getForObject("http://NFL-TEAM-SERVICE/nfl/teams/abr/" + teamAbr, Team.class);
+    Team team = template.getForObject("http://NFL-TEAM-SERVICE/nfl/teams/team/abr/" + teamAbr, Team.class);
     vo.setPlayer(player);
     vo.setTeam(team);
     return vo;
+  }
+
+  // POST
+  public Player addNewPlayer(Player p) {
+    log.info("Inside addNewPlayer of PlayerService");
+    return repository.save(p);
+  }
+
+  // PATCH
+  public Player updatePlayer(Map<String, String> data) {
+    log.info("Inside updatePlayer of PlayerService");
+    Integer playerId = Integer.parseInt(data.get("id"));
+    Player p = repository.getById(playerId);
+    for (String field : data.keySet()) {
+      switch (field) {
+        case "name":
+          p.setName(data.get("name"));
+          break;
+
+        case "team":
+          p.setTeam(data.get("team"));
+          break;
+
+        case "jersey_number":
+          p.setJersey_number(data.get("jersey_number"));
+          break;
+
+        case "position":
+          p.setPosition(data.get("position"));
+          break;
+      }
+    }
+    return repository.save(p);
+  }
+
+  // DELETE
+  public Player deletePlayer(Integer id) {
+    log.info("Inside deletePlayer of PlayerService");
+    Player p = repository.getById(id);
+    repository.delete(p);
+    return p;
   }
 }
