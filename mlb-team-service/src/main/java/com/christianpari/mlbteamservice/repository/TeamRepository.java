@@ -16,4 +16,13 @@ public interface TeamRepository extends JpaRepository<Team, Integer> {
 
   @Query(value = "FROM #{#entityName} WHERE team_abr LIKE %:abr%")
   List<Team> getTeamsByAbr(@Param("abr") String abr);
+
+  @Query(value = "FROM #{#entityName} WHERE conference LIKE %:con%")
+  List<Team> getTeamsByConference(@Param("con") String con);
+
+  @Query(value = "FROM #{#entityName} WHERE division LIKE %:div%")
+  List<Team> getTeamsByDivision(@Param("div") String div);
+
+  @Query(value = "FROM #{#entityName} WHERE conference LIKE %:con% AND division LIKE %:div%")
+  List<Team> getTeamsByConAndDiv(@Param("con") String con, @Param("div") String div);
 }

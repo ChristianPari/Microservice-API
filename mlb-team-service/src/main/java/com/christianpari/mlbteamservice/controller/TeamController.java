@@ -4,12 +4,10 @@ import com.christianpari.mlbteamservice.entity.Team;
 import com.christianpari.mlbteamservice.service.TeamService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/mlb/teams")
@@ -46,5 +44,44 @@ public class TeamController {
   public Team getTeamById(@PathVariable Integer id) {
     log.info("Inside getTeamById of TeamController");
     return service.getTeamById(id);
+  }
+
+  @GetMapping("/conference/{con}")
+  public List<Team> getTeamsByConference(@PathVariable String con) {
+    log.info("Inside getTeamsByConference of TeamController");
+    return service.getTeamsByConference(con);
+  }
+
+  @GetMapping("/division/{div}")
+  public List<Team> getTeamsByDivision(@PathVariable String div) {
+    log.info("Inside getTeamsByDivision of TeamController");
+    return service.getTeamsByDivision(div);
+  }
+
+  @GetMapping("/conference/{con}/division/{div}")
+  public List<Team> getTeamsByConAndDiv(@PathVariable("con") String con, @PathVariable("div") String div) {
+    log.info("Inside getTeamsByConAndDiv of TeamController");
+    return service.getTeamsByConAndDiv(con, div);
+  }
+
+  // POST
+  @PostMapping("/newTeam")
+  public Team addNewTeam(@RequestBody Team t) {
+    log.info("Inside addNewTeam of TeamController");
+    return service.addNewTeam(t);
+  }
+
+  // PATCH
+  @PatchMapping("/updateTeam")
+  public Team updateTeam(@RequestBody Map<String, String> data) {
+    log.info("Inside updateTeam of TeamController");
+    return service.updateTeam(data);
+  }
+
+  // DELETE
+  @DeleteMapping("/deleteTeam/{id}")
+  public Team deleteTeam(@PathVariable Integer id) {
+    log.info("Inside deleteTeam of TeamController");
+    return service.deleteTeam(id);
   }
 }

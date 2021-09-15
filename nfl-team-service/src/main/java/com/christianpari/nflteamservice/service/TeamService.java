@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -53,5 +54,46 @@ public class TeamService {
   public List<Team> getTeamsByConAndDiv(String con, String div) {
     log.info("Inside getTeamsByConAndDiv in TeamService");
     return repository.getTeamsByConAndDiv(con, div);
+  }
+
+  // POST
+  public Team addNewTeam(Team t) {
+    log.info("Inside addNewTeam of TeamService");
+    return repository.save(t);
+  }
+
+  // PATCH
+  public Team updateTeam(Map<String, String> data) {
+    log.info("Inside updateTeam of TeamService");
+    Integer teamId = Integer.parseInt(data.get("id"));
+    Team t = repository.getById(teamId);
+    for (String field : data.keySet()) {
+      switch (field) {
+        case "name":
+          t.setTeam_name(data.get("name"));
+          break;
+
+        case "abr":
+          t.setTeam_abr(data.get("abr"));
+          break;
+
+        case "conference":
+          t.setConference(data.get("conference"));
+          break;
+
+        case "division":
+          t.setDivision(data.get("division"));
+          break;
+      }
+    }
+    return repository.save(t);
+  }
+
+  // DELETE
+  public Team deleteTeam(Integer id) {
+    log.info("Inside deleteTeam of TeamService");
+    Team t = repository.getById(id);
+    repository.delete(t);
+    return t;
   }
 }
