@@ -34,3 +34,6 @@ Ultimately making multiple microservices which can all be used and accessed from
 - Understanding how to use Eureka to manage endpoints on different ports and naming these for access in other services is very handy
 - Using Queries from JPA to make SQL statements to my databases via the repository upon a request was amazing, unsure how I hadn't came across this previously but found it so useful and much faster than handling the data within the Entity Service
 - Using Springs' RestTemplate package to make requests to other services within another service
+
+### Links to folder READMEs
+[Cloud Gateway](https://github.com/ChristianPari/Microservice-API/tree/main/cloud-gateway#cloud-gateway) ~ [Service Registry](https://github.com/ChristianPari/Microservice-API/tree/main/service-registry#service-registry)
