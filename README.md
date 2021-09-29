@@ -36,4 +36,7 @@ Ultimately making multiple microservices which can all be used and accessed from
 - Using Springs' RestTemplate package to make requests to other services within another service
 
 ### Links to folder READMEs
-[Cloud Gateway](https://github.com/ChristianPari/Microservice-API/tree/main/cloud-gateway#cloud-gateway) ~ [Service Registry](https://github.com/ChristianPari/Microservice-API/tree/main/service-registry#service-registry)
+[Cloud Gateway](https://github.com/ChristianPari/Microservice-API/tree/main/cloud-gateway#cloud-gateway) ~
+[Service Registry](https://github.com/ChristianPari/Microservice-API/tree/main/service-registry#service-registry) ~ 
+[Team Services](https://github.com/ChristianPari/Microservice-API/tree/main/nfl-team-service#teams-services) ~
+[Player Services](https://github.com/ChristianPari/Microservice-API/tree/main/nfl-player-service#players-services)
